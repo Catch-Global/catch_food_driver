@@ -31,7 +31,10 @@ Future<User> login(User user) async {
 }
 
 Future<User> register(User user) async {
-  final String url = '${GlobalConfiguration().getString('api_base_url')}register';
+  user.login = user.email;
+  user.langKey = 'en';
+  final String url =
+      '${GlobalConfiguration().getString('api_base_url')}/register';
   final client = new http.Client();
   final response = await client.post(
     url,
@@ -46,7 +49,8 @@ Future<User> register(User user) async {
 }
 
 Future<bool> resetPassword(User user) async {
-  final String url = '${GlobalConfiguration().getString('api_base_url')}send_reset_link_email';
+  final String url =
+      '${GlobalConfiguration().getString('api_base_url')}send_reset_link_email';
   final client = new http.Client();
   final response = await client.post(
     url,
@@ -71,7 +75,8 @@ void setCurrentUser(jsonString) async {
   try {
     if (json.decode(jsonString)['data'] != null) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('current_user', json.encode(json.decode(jsonString)['data']));
+      await prefs.setString(
+          'current_user', json.encode(json.decode(jsonString)['data']));
     }
   } catch (e) {
     print(jsonString);
@@ -89,7 +94,8 @@ Future<User> getCurrentUser() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
 //  prefs.clear();
   if (currentUser.value.auth == null && prefs.containsKey('current_user')) {
-    currentUser.value = User.fromJSON(json.decode(await prefs.get('current_user')));
+    currentUser.value =
+        User.fromJSON(json.decode(await prefs.get('current_user')));
     currentUser.value.auth = true;
   } else {
     currentUser.value.auth = false;
@@ -102,14 +108,16 @@ Future<CreditCard> getCreditCard() async {
   CreditCard _creditCard = new CreditCard();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   if (prefs.containsKey('credit_card')) {
-    _creditCard = CreditCard.fromJSON(json.decode(await prefs.get('credit_card')));
+    _creditCard =
+        CreditCard.fromJSON(json.decode(await prefs.get('credit_card')));
   }
   return _creditCard;
 }
 
 Future<User> update(User user) async {
   final String _apiToken = 'api_token=${currentUser.value.apiToken}';
-  final String url = '${GlobalConfiguration().getString('api_base_url')}users/${currentUser.value.id}?$_apiToken';
+  final String url =
+      '${GlobalConfiguration().getString('api_base_url')}users/${currentUser.value.id}?$_apiToken';
   final client = new http.Client();
   print(user.toMap());
   final response = await client.post(
@@ -131,7 +139,12 @@ Future<Stream<Address>> getAddresses() async {
   final client = new http.Client();
   final streamedRest = await client.send(http.Request('get', Uri.parse(url)));
 
-  return streamedRest.stream.transform(utf8.decoder).transform(json.decoder).map((data) => Helper.getData(data)).expand((data) => (data as List)).map((data) {
+  return streamedRest.stream
+      .transform(utf8.decoder)
+      .transform(json.decoder)
+      .map((data) => Helper.getData(data))
+      .expand((data) => (data as List))
+      .map((data) {
     return Address.fromJSON(data);
   });
 }
@@ -140,7 +153,8 @@ Future<Address> addAddress(Address address) async {
   User _user = userRepo.currentUser.value;
   final String _apiToken = 'api_token=${_user.apiToken}';
   address.userId = _user.id;
-  final String url = '${GlobalConfiguration().getString('api_base_url')}delivery_addresses?$_apiToken';
+  final String url =
+      '${GlobalConfiguration().getString('api_base_url')}delivery_addresses?$_apiToken';
   final client = new http.Client();
   final response = await client.post(
     url,
@@ -154,7 +168,8 @@ Future<Address> updateAddress(Address address) async {
   User _user = userRepo.currentUser.value;
   final String _apiToken = 'api_token=${_user.apiToken}';
   address.userId = _user.id;
-  final String url = '${GlobalConfiguration().getString('api_base_url')}delivery_addresses/${address.id}?$_apiToken';
+  final String url =
+      '${GlobalConfiguration().getString('api_base_url')}delivery_addresses/${address.id}?$_apiToken';
   final client = new http.Client();
   final response = await client.put(
     url,
@@ -167,7 +182,8 @@ Future<Address> updateAddress(Address address) async {
 Future<Address> removeDeliveryAddress(Address address) async {
   User _user = userRepo.currentUser.value;
   final String _apiToken = 'api_token=${_user.apiToken}';
-  final String url = '${GlobalConfiguration().getString('api_base_url')}delivery_addresses/${address.id}?$_apiToken';
+  final String url =
+      '${GlobalConfiguration().getString('api_base_url')}delivery_addresses/${address.id}?$_apiToken';
   final client = new http.Client();
   final response = await client.delete(
     url,

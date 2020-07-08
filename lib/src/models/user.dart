@@ -12,6 +12,9 @@ class User {
   String bio;
   Media image;
 
+  String login;
+  String langKey;
+
   // used for indicate if client logged in or not
   bool auth;
 
@@ -41,7 +44,11 @@ class User {
       } catch (e) {
         bio = "";
       }
-      image = jsonMap['media'] != null && (jsonMap['media'] as List).length > 0 ? Media.fromJSON(jsonMap['media'][0]) : new Media();
+      login = jsonMap['login'] != null ? jsonMap['login'] : '';
+      langKey = jsonMap['langKey'] != null ? jsonMap['langKey'] : '';
+      image = jsonMap['media'] != null && (jsonMap['media'] as List).length > 0
+          ? Media.fromJSON(jsonMap['media'][0])
+          : new Media();
     } catch (e) {
       print(e);
     }
@@ -60,6 +67,8 @@ class User {
     map["phone"] = phone;
     map["address"] = address;
     map["bio"] = bio;
+    map["login"] = login;
+    map["langKey"] = langKey;
     map["media"] = image?.toMap();
     return map;
   }
@@ -69,5 +78,9 @@ class User {
     var map = this.toMap();
     map["auth"] = this.auth;
     return map.toString();
+  }
+
+  bool profileCompleted() {
+    return address != null && address != '' && phone != null && phone != '';
   }
 }

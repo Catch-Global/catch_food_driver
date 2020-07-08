@@ -1,4 +1,4 @@
 {
-  "base_url": "https://markets.smartersvision.com/",
-  "api_base_url": "https://markets.smartersvision.com/api/driver/"
+  "base_url": "http://192.168.0.111:8080/",
+  "api_base_url": "http://192.168.0.111:8080/api/"
 }
