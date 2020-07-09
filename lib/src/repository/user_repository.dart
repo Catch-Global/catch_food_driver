@@ -34,7 +34,7 @@ Future<User> register(User user) async {
   user.login = user.email;
   user.langKey = 'en';
   final String url =
-      '${GlobalConfiguration().getString('api_base_url')}/register';
+      '${GlobalConfiguration().getString('api_base_url')}register';
   final client = new http.Client();
   final response = await client.post(
     url,
