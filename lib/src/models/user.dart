@@ -11,9 +11,9 @@ class User {
   String address;
   String bio;
   Media image;
-
   String login;
   String langKey;
+  String username;
 
   // used for indicate if client logged in or not
   bool auth;
@@ -44,8 +44,9 @@ class User {
       } catch (e) {
         bio = "";
       }
-      login = jsonMap['login'] != null ? jsonMap['login'] : '';
+      login = jsonMap['email'] != null ? jsonMap['email'] : '';
       langKey = jsonMap['langKey'] != null ? jsonMap['langKey'] : '';
+      username = jsonMap['email'] != null ? jsonMap['email'] : '';
       image = jsonMap['media'] != null && (jsonMap['media'] as List).length > 0
           ? Media.fromJSON(jsonMap['media'][0])
           : new Media();
@@ -67,7 +68,8 @@ class User {
     map["phone"] = phone;
     map["address"] = address;
     map["bio"] = bio;
-    map["login"] = login;
+    map["login"] = email;
+    map["username"] = email;
     map["langKey"] = langKey;
     map["media"] = image?.toMap();
     return map;

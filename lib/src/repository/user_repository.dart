@@ -16,7 +16,7 @@ ValueNotifier<User> currentUser = new ValueNotifier(User());
 Address deliveryAddress = new Address();
 
 Future<User> login(User user) async {
-  final String url = '${GlobalConfiguration().getString('api_base_url')}login';
+  final String url = '${GlobalConfiguration().getString('api_base_url')}authenticate';
   final client = new http.Client();
   final response = await client.post(
     url,

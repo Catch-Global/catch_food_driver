@@ -82,7 +82,7 @@ class S implements WidgetsLocalizations {
   String get lets_start_with_register => "Let's Start with register!";
   String get light_mode => "Light Mode";
   String get log_out => "Log out";
-  String get login => "Login";
+  String get login => "GAL";
   String get long_press_to_edit_item_swipe_item_to_delete_it => "Long press to edit item, swipe item to delete it";
   String get market_refreshed_successfuly => "Market refreshed successfully";
   String get new_address_added_successfully => "New Address added successfully";
