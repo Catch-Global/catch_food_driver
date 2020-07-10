@@ -69,7 +69,7 @@ class ProfileAvatarWidget extends StatelessWidget {
             ),
           ),
           Text(
-            user.name,
+            user.firstName + " " + user.lastName,
             style: Theme.of(context).textTheme.headline.merge(TextStyle(color: Theme.of(context).primaryColor)),
           ),
           Text(

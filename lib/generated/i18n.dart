@@ -62,6 +62,8 @@ class S implements WidgetsLocalizations {
   String get favorite_products => "Favorite Products";
   String get full_address => "Full Address";
   String get full_name => "Full name";
+  String get first_name => "First name";
+  String get last_name => "Last name";
   String get g => "g";
   String get help__support => "Help & Support";
   String get help_support => "Help & Support";
@@ -92,7 +94,7 @@ class S implements WidgetsLocalizations {
   String get not_a_valid_cvc => "Not a valid CVC";
   String get not_a_valid_date => "Not a valid date";
   String get not_a_valid_email => "Not a valid email";
-  String get not_a_valid_full_name => "Not a valid full name";
+  String get not_a_valid_full_name => "Not a valid name";
   String get not_a_valid_number => "Not a valid number";
   String get not_a_valid_phone => "Not a valid phone";
   String get notifications => "Notifications";

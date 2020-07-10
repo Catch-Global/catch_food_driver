@@ -24,8 +24,24 @@ Future<User> login(User user) async {
     body: json.encode(user.toMap()),
   );
   if (response.statusCode == 200) {
+    return await getUserAccountInfo(response.headers[HttpHeaders.authorizationHeader]);
+
+  }
+
+   return null;
+}
+
+Future<User> getUserAccountInfo(String token) async {
+  final String url = '${GlobalConfiguration().getString('api_base_url')}account';
+  final client = new http.Client();
+  final response = await client.get(
+    url,
+    headers: {HttpHeaders.contentTypeHeader: 'application/json', HttpHeaders.authorizationHeader:  token },
+  );
+  if (response.statusCode == 200) {
     setCurrentUser(response.body);
-    currentUser.value = User.fromJSON(json.decode(response.body)['data']);
+    currentUser.value = User.fromJSON(json.decode(response.body));
+    currentUser.value.apiToken = token;
   }
   return currentUser.value;
 }
@@ -73,11 +89,11 @@ Future<void> logout() async {
 
 void setCurrentUser(jsonString) async {
   try {
-    if (json.decode(jsonString)['data'] != null) {
+   // if (json.decode(jsonString)['data'] != null) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString(
-          'current_user', json.encode(json.decode(jsonString)['data']));
-    }
+          'current_user', json.encode(json.decode(jsonString)));
+   // }
   } catch (e) {
     print(jsonString);
   }

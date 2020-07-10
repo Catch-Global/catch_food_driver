@@ -2,7 +2,8 @@ import '../models/media.dart';
 
 class User {
   String id;
-  String name;
+  String firstName;
+  String lastName;
   String email;
   String password;
   String apiToken;
@@ -25,7 +26,8 @@ class User {
   User.fromJSON(Map<String, dynamic> jsonMap) {
     try {
       id = jsonMap['id'].toString();
-      name = jsonMap['name'] != null ? jsonMap['name'] : '';
+      firstName = jsonMap['firstName'] != null ? jsonMap['firstName'] : '';
+      lastName = jsonMap['lastName'] != null ? jsonMap['lastName'] : '';
       email = jsonMap['email'] != null ? jsonMap['email'] : '';
       apiToken = jsonMap['api_token'];
       deviceToken = jsonMap['device_token'];
@@ -59,7 +61,8 @@ class User {
     var map = new Map<String, dynamic>();
     map["id"] = id;
     map["email"] = email;
-    map["name"] = name;
+    map["firstName"] = firstName;
+    map["lastName"] = lastName;
     map["password"] = password;
     map["api_token"] = apiToken;
     if (deviceToken != null) {

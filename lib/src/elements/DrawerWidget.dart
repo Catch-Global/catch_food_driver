@@ -41,7 +41,7 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
 //              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(35)),
                     ),
                     accountName: Text(
-                      currentUser.value.name,
+                      currentUser.value.firstName + " " + currentUser.value.lastName,
                       style: Theme.of(context).textTheme.title,
                     ),
                     accountEmail: Text(

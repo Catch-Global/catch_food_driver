@@ -70,10 +70,27 @@ class _SignUpWidgetState extends StateMVC<SignUpWidget> {
                     children: <Widget>[
                       TextFormField(
                         keyboardType: TextInputType.text,
-                        onSaved: (input) => _con.user.name = input,
+                        onSaved: (input) => _con.user.firstName = input,
                         validator: (input) => input.length < 3 ? S.of(context).should_be_more_than_3_letters : null,
                         decoration: InputDecoration(
-                          labelText: S.of(context).full_name,
+                          labelText: S.of(context).last_name,
+                          labelStyle: TextStyle(color: Theme.of(context).accentColor),
+                          contentPadding: EdgeInsets.all(12),
+                          hintText: S.of(context).john_doe,
+                          hintStyle: TextStyle(color: Theme.of(context).focusColor.withOpacity(0.7)),
+                          prefixIcon: Icon(Icons.person_outline, color: Theme.of(context).accentColor),
+                          border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.2))),
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.5))),
+                          enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).focusColor.withOpacity(0.2))),
+                        ),
+                      ),
+                      SizedBox(height: 30),
+                      TextFormField(
+                        keyboardType: TextInputType.text,
+                        onSaved: (input) => _con.user.lastName = input,
+                        validator: (input) => input.length < 3 ? S.of(context).should_be_more_than_3_letters : null,
+                        decoration: InputDecoration(
+                          labelText: S.of(context).last_name,
                           labelStyle: TextStyle(color: Theme.of(context).accentColor),
                           contentPadding: EdgeInsets.all(12),
                           hintText: S.of(context).john_doe,

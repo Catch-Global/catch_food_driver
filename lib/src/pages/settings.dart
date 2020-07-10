@@ -47,7 +47,12 @@ class _SettingsWidgetState extends StateMVC<SettingsWidget> {
                             child: Column(
                               children: <Widget>[
                                 Text(
-                                  currentUser.value.name,
+                                  currentUser.value.firstName,
+                                  textAlign: TextAlign.left,
+                                  style: Theme.of(context).textTheme.display2,
+                                ),
+                                Text(
+                                  currentUser.value.lastName,
                                   textAlign: TextAlign.left,
                                   style: Theme.of(context).textTheme.display2,
                                 ),
@@ -108,14 +113,26 @@ class _SettingsWidgetState extends StateMVC<SettingsWidget> {
                             onTap: () {},
                             dense: true,
                             title: Text(
-                              S.of(context).full_name,
+                              S.of(context).first_name,
                               style: Theme.of(context).textTheme.body1,
                             ),
                             trailing: Text(
-                              currentUser.value.name,
+                              currentUser.value.firstName,
                               style: TextStyle(color: Theme.of(context).focusColor),
                             ),
                           ),
+                          ListTile(
+                          onTap: () {},
+                      dense: true,
+                      title: Text(
+                      S.of(context).last_name,
+                      style: Theme.of(context).textTheme.body1,
+                      ),
+                      trailing: Text(
+                      currentUser.value.lastName,
+                      style: TextStyle(color: Theme.of(context).focusColor),
+                      ),
+                      ),
                           ListTile(
                             onTap: () {},
                             dense: true,

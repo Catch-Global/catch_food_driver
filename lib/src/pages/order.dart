@@ -173,9 +173,10 @@ class _OrderWidgetState extends StateMVC<OrderWidget> {
                                 children: <Widget>[
                                   Expanded(
                                     child: Text(
-                                      _con.order.user.name,
+                                      _con.order.user.firstName + " " + _con.order.user.lastName,
                                       style: Theme.of(context).textTheme.body2,
                                     ),
+
                                   ),
                                   SizedBox(width: 20),
                                   SizedBox(

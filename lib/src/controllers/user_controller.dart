@@ -27,9 +27,10 @@ class UserController extends ControllerMVC {
       loginFormKey.currentState.save();
       repository.login(user).then((value) {
         //print(value.apiToken);
+       // if (value != null && value.apiToken != null) {
         if (value != null && value.apiToken != null) {
           scaffoldKey?.currentState?.showSnackBar(SnackBar(
-            content: Text(S.current.welcome + value.name),
+            content: Text(S.current.welcome + value.firstName + " " + value.lastName),
           ));
           Navigator.of(scaffoldKey.currentContext).pushReplacementNamed('/Pages', arguments: 1);
         } else {
@@ -47,7 +48,7 @@ class UserController extends ControllerMVC {
       repository.register(user).then((value) {
         if (value != null && value.apiToken != null) {
           scaffoldKey?.currentState?.showSnackBar(SnackBar(
-            content: Text(S.current.welcome + value.name),
+            content: Text(S.current.welcome + value.firstName + " " + value.lastName),
           ));
           Navigator.of(scaffoldKey.currentContext).pushReplacementNamed('/Pages', arguments: 1);
         } else {
